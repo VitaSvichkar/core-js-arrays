@@ -300,10 +300,10 @@ function createNDimensionalArray(/* n, size */) {
  *    flattenArray(['a', ['b', ['c', 'd'], 'e'], 'f']) => ['a', 'b', 'c', 'd', 'e', 'f']
  *    flattenArray([1, 2, 3, 4]) => [1, 2, 3, 4]
  */
-function flattenArray(/* nestedArray */) {
-  throw new Error('Not implemented');
+function flattenArray(nestedArray) {
+  return nestedArray.flat(Infinity);
 }
-
+flattenArray([1, [2, [3, 4], 5], 6]);
 /**
  * Projects each element of the specified array to a sequence
  * and flattens the resulting sequences into one array.
@@ -317,10 +317,11 @@ function flattenArray(/* nestedArray */) {
  *   selectMany([[1, 2], [3, 4], [5, 6]], (x) => x) =>   [ 1, 2, 3, 4, 5, 6 ]
  *   selectMany(['one','two','three'], (x) => x.split('')) =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  const newArr = arr.flatMap(childrenSelector);
+  return newArr;
 }
-
+selectMany(['one', 'two', 'three'], (x) => x.split(''));
 /**
  * Every month, you record your income and expenses.
  * Expenses may be greater than income.
@@ -366,10 +367,11 @@ function createChunks(/* arr, chunkSize */) {
  *    generateOdds(2) => [ 1, 3 ]
  *    generateOdds(5) => [ 1, 3, 5, 7, 9 ]
  */
-function generateOdds(/* len */) {
-  throw new Error('Not implemented');
+function generateOdds(len) {
+  const arr = Array.from({ length: len }, (_, index) => 2 * index + 1);
+  return arr;
 }
-
+generateOdds(5);
 /**
  * Returns an element from the multidimensional array by the specified indices.
  *
@@ -398,10 +400,17 @@ function getElementByIndices(/* arr, indices */) {
  *  getFalsyValuesCount([ -1, 'false', null, 0 ]) => 2
  *  getFalsyValuesCount([ null, undefined, NaN, false, 0, '' ]) => 6
  */
-function getFalsyValuesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getFalsyValuesCount(arr) {
+  let sum = 0;
+  arr.map((item) => {
+    if (!item) {
+      sum += 1;
+    }
+    return sum;
+  });
+  return sum;
 }
-
+getFalsyValuesCount([-1, 'false', null, 0]);
 /**
  * Creates an identity matrix of the specified size.
  *
@@ -435,10 +444,17 @@ function getIdentityMatrix(/* n */) {
  *    getIndicesOfOddNumbers([2, 4, 6, 8, 10]) => []
  *    getIndicesOfOddNumbers([11, 22, 33, 44, 55]) => [0, 2, 4]
  */
-function getIndicesOfOddNumbers(/* numbers */) {
-  throw new Error('Not implemented');
+function getIndicesOfOddNumbers(numbers) {
+  const ind = [];
+  numbers.filter((item, index) => {
+    if (item % 2) {
+      ind.push(index);
+    }
+    return ind;
+  });
+  return ind;
 }
-
+getIndicesOfOddNumbers([11, 22, 33, 44, 55]);
 /**
  * Returns the array of RGB Hex strings from the specified array of numbers.
  *
