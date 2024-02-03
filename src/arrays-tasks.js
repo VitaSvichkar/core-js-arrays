@@ -465,10 +465,13 @@ getIndicesOfOddNumbers([11, 22, 33, 44, 55]);
  *    getHexRGBValues([ 0, 255, 16777215]) => [ '#000000', '#0000FF', '#FFFFFF' ]
  *    getHexRGBValues([]) => []
  */
-function getHexRGBValues(/* arr */) {
-  throw new Error('Not implemented');
+function getHexRGBValues(arr) {
+  const newArr = arr.map((item) => {
+    return `#${item.toString(16).padStart(6, '0').toUpperCase()}`;
+  });
+  return newArr;
 }
-
+getHexRGBValues([0, 255, 16777215]);
 /**
  * Returns the n largest values from the specified array
  *
@@ -483,10 +486,14 @@ function getHexRGBValues(/* arr */) {
  *   getMaxItems([ 10, 2, 7, 5, 3, -5 ], 3) => [ 10, 7, 5 ]
  *   getMaxItems([ 10, 10, 10, 10 ], 3) => [ 10, 10, 10 ]
  */
-function getMaxItems(/* arr, n */) {
-  throw new Error('Not implemented');
+function getMaxItems(arr, n) {
+  arr.sort((a, b) => {
+    return b - a;
+  });
+  const newArr = arr.slice(0, n);
+  return newArr;
 }
-
+getMaxItems([10, 2, 7, 5, 3, -5], 3);
 /**
  * Finds and returns an array containing only the common elements found in two arrays.
  *
@@ -499,10 +506,15 @@ function getMaxItems(/* arr, n */) {
  *    findCommonElements(['a', 'b', 'c'], ['b', 'c', 'd']) => [ 'b', 'c' ]
  *    findCommonElements([1, 2, 3], ['a', 'b', 'c']) => []
  */
-function findCommonElements(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function findCommonElements(arr1, arr2) {
+  // const newArr = [];
+  // arr1.map((item) => {
+  //   if (arr2.includes(item)) return newArr.push(item);
+  // });
+  // return newArr;
+  return arr1.filter((item) => arr2.includes(item));
 }
-
+findCommonElements(['a', 'b', 'c'], ['b', 'c', 'd']);
 /**
  * Finds the length of the longest increasing subsequence of a given array of integers.
  *
@@ -532,10 +544,20 @@ function findLongestIncreasingSubsequence(/* nums */) {
  *  propagateItemsByPositionIndex([ 'a', 'b', 'c', null ]) => [ 'a', 'b', 'b', 'c', 'c', 'c',  null, null, null, null ]
  *  propagateItemsByPositionIndex([ 1,2,3,4,5 ]) => [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  if (arr.length === 0) {
+    return [];
+  }
+  const array = arr.flatMap((item, index) => {
+    if (index === 0) {
+      return arr[0];
+      // return Array(index + 1).fill(item);
+    }
+    return Array(index + 1).fill(item);
+  });
+  return array;
 }
-
+propagateItemsByPositionIndex([1, 2, 3, 4, 5]);
 /**
  * Shifts an array by n positions. If n is negative, the array is shifted to the left;
  * if positive, it is shifted to the right.
