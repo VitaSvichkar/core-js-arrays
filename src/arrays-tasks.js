@@ -571,10 +571,22 @@ propagateItemsByPositionIndex([1, 2, 3, 4, 5]);
  *    shiftArray(['a', 'b', 'c', 'd'], -1) => ['b', 'c', 'd', 'a']
  *    shiftArray([10, 20, 30, 40, 50], -3) => [40, 50, 10, 20, 30]
  */
-function shiftArray(/* arr, n */) {
-  throw new Error('Not implemented');
+function shiftArray(arr, n) {
+  // let tail;
+  let head;
+  let tail;
+  if (n < 0) {
+    const num = Math.abs(n);
+    head = arr.slice(num);
+    tail = arr.slice(0, num);
+  } else {
+    head = arr.slice(-n);
+    tail = arr.slice(0, n + 1);
+  }
+  // console.log(head, tail);
+  return head.concat(tail);
 }
-
+shiftArray(['a', 'b', 'c', 'd'], -1);
 /**
  * Sorts digit names.
  *
@@ -588,10 +600,23 @@ function shiftArray(/* arr, n */) {
  *   sortDigitNamesByNumericOrder([ 'nine','eight','nine','eight' ]) => [ 'eight','eight','nine','nine']
  *   sortDigitNamesByNumericOrder([ 'one','one','one','zero' ]) => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  const nums = {
+    zero: 0,
+    one: 1,
+    two: 2,
+    three: 3,
+    four: 4,
+    five: 5,
+    six: 6,
+    seven: 7,
+    eight: 8,
+    nine: 9,
+  };
+  arr.sort((a, b) => nums[a] - nums[b]);
+  return arr;
 }
-
+sortDigitNamesByNumericOrder(['one', 'one', 'one', 'zero']);
 /**
  * Swaps the head and tail of the specified array:
  * the head (first half) of array move to the end, the tail (last half) move to the start.
@@ -611,10 +636,24 @@ function sortDigitNamesByNumericOrder(/* arr */) {
  *   swapHeadAndTail([]) => []
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  const newArr = Math.floor(arr.length / 2);
+  let head;
+  let tail;
+  if (arr.length % 2) {
+    head = arr.slice(0, newArr);
+    tail = arr.slice(newArr + 1);
+    arr.splice(0, newArr, tail);
+    arr.splice(2, newArr, head);
+    return arr.flat();
+  }
+  head = arr.slice(0, newArr);
+  tail = arr.slice(newArr);
+  arr.splice(0, newArr, tail);
+  arr.splice(1, newArr, head);
+  return arr.flat();
 }
-
+swapHeadAndTail([1, 2, 3, 4, 5]);
 module.exports = {
   getIntervalArray,
   sumArrays,
