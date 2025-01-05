@@ -43,8 +43,26 @@ getIntervalArray(3, 7);
  *    sumArrays([10, 20, 30], [5, 10, 15]) => [15, 30, 45]
  *    sumArrays([-1, 0, 1], [1, 2, 3, 4]) => [0, 2, 4, 4]
  */
-function sumArrays(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function sumArrays(arr1, arr2) {
+  const len1 = arr1.length;
+  const len2 = arr2.length;
+  const arrSum = [];
+  const array1 = arr1;
+  const array2 = arr2;
+
+  if (len1 > len2) {
+    array2.length = arr1.length;
+    arr2.fill(0, len2, len1);
+  } else {
+    array1.length = arr2.length;
+    arr1.fill(0, len1, len2);
+  }
+
+  for (let i = 0; i < arr1.length; i += 1) {
+    const sum = arr1[i] + arr2[i];
+    arrSum.push(sum);
+  }
+  return arrSum;
 }
 
 /**
@@ -335,8 +353,14 @@ selectMany(['one', 'two', 'three'], (x) => x.split(''));
  *   calculateBalance([ [ 10, 8 ], [ 1, 5 ] ])  => (10 - 8) + (1 - 5) = 2 + -4 = -2
  *   calculateBalance([]) => 0
  */
-function calculateBalance(/* arr */) {
-  throw new Error('Not implemented');
+function calculateBalance(arr) {
+  let sum = 0;
+  for (let i = 0; i < arr.length; i += 1) {
+    for (let j = 0; j < arr[i].length - 1; j += 1) {
+      sum += arr[i][j] - arr[i][j + 1];
+    }
+  }
+  return sum;
 }
 
 /**
@@ -384,8 +408,15 @@ generateOdds(5);
  *   getElementByIndices(['one','two','three'], [2]) => 'three'  (arr[2])
  *   getElementByIndices([[[ 1, 2, 3]]], [ 0, 0, 1 ]) => 2        (arr[0][0][1])
  */
-function getElementByIndices(/* arr, indices */) {
-  throw new Error('Not implemented');
+function getElementByIndices(arr, indices) {
+  const len = indices.length;
+  let i = 0;
+  let array = arr;
+  while (i < len) {
+    array = array[indices[i]];
+    i += 1;
+  }
+  return array;
 }
 
 /**
@@ -429,8 +460,15 @@ getFalsyValuesCount([-1, 'false', null, 0]);
  *                              [0,0,0,1,0],
  *                              [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  const arr = Array.from({ length: n }, () => {
+    return new Array(n).fill(0);
+  });
+
+  arr.forEach((_, i) => {
+    arr[i][i] = 1;
+  });
+  return arr;
 }
 
 /**
@@ -507,11 +545,6 @@ getMaxItems([10, 2, 7, 5, 3, -5], 3);
  *    findCommonElements([1, 2, 3], ['a', 'b', 'c']) => []
  */
 function findCommonElements(arr1, arr2) {
-  // const newArr = [];
-  // arr1.map((item) => {
-  //   if (arr2.includes(item)) return newArr.push(item);
-  // });
-  // return newArr;
   return arr1.filter((item) => arr2.includes(item));
 }
 findCommonElements(['a', 'b', 'c'], ['b', 'c', 'd']);
